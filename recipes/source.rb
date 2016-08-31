@@ -59,6 +59,7 @@ end
 bash 'compile_ffmpeg' do
   cwd "#{Chef::Config[:file_cache_path]}/ffmpeg"
   code <<-EOH
+    #{node['ffmpeg']['env_variables'].join(' ')}
     ./configure --prefix=#{node['ffmpeg']['prefix']} #{node['ffmpeg']['compile_flags'].join(' ')}
     make clean && make && make install
   EOH
